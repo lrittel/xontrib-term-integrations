@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 def osc_cmd(prefix: str, opt: dict):
     opt_s = opt_dict_to_str(opt)
-    return f"{Codes.OSC}133;{prefix}{opt_s}{Codes.BEL}"
+    return f"{Codes.OSC}133;{prefix}{opt_s}{Codes.ST}"
 
 
 def line_new():
