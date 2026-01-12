@@ -152,4 +152,19 @@ class ShellIntegrationPrompt:
             ansi_esc(prefix) if prefix else ""
         )  # don't escape empty pre/suf-fix (breaks multiline prompts)
         suffix = ansi_esc(suffix) if suffix else ""
-        return prefix + prompt + suffix
+
+        # Join the suffix and prefix with the first and last nonempty line respectively.
+        result_lines = list(prompt.splitlines())
+        for idx in range(len(result_lines)):
+            l = result_lines[idx]
+            if l:
+                result_lines[idx] = prefix + l
+                break
+        for idx in reversed(range(len(result_lines))):
+            l = result_lines[idx]
+            if l:
+                result_lines[idx] = l + suffix
+                break
+        result = "\n".join(result_lines)
+
+        return result
